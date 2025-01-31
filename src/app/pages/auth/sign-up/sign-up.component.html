@@ -1,0 +1,63 @@
+<main class=" h-full flex bg-white shadow-lg rounded-lg overflow-hidden">
+
+    <!-- Formulario de Registro -->
+    <section class="w-1/2 p-20 flex flex-col justify-center">
+        <header class="mb-6 text-center">
+            <h1 class="text-2xl font-bold text-gray-700">Bienvenido a <span class="text-green-500" >ChatAI</span></h1>
+            <p class="text-sm text-gray-500">Regístrate para comenzar</p>
+        </header>
+
+        <form class="space-y-4 flex flex-col" [formGroup]="signUpForm" (ngSubmit)="onRegister()" >
+            <mat-label class="block text-gray-700 font-medium">Nombre</mat-label>
+            <mat-form-field class="w-full" appearance="outline">
+                <input matInput type="text" formControlName="name">
+                @if(signUpForm.get('name')?.hasError('required') ){
+                    <mat-error>
+                      Este campo es obligatorio
+                    </mat-error>
+                  }
+            </mat-form-field>
+            <mat-label class="block text-gray-700 font-medium">Contraseña</mat-label>
+            <mat-form-field class="w-full" appearance="outline">
+                <input matInput type="password" formControlName="password">
+                @if(signUpForm.get('name')?.hasError('required') ){
+                    <mat-error>
+                      Este campo es obligatorio
+                    </mat-error>
+                }
+                @if(signUpForm.get('name')?.hasError('required') ){
+                    <mat-error>
+                      La contraseña debe tener al menos un número y una letra
+                    </mat-error>
+                  }
+            </mat-form-field>
+            <mat-label class="block text-gray-700 font-medium">Confirmar Contraseña</mat-label>
+            <mat-form-field class="w-full" appearance="outline" >
+                <input  matInput type="password" formControlName="confirmPassword">
+                @if(signUpForm.get('confirmPassword')?.hasError('required') ){
+                    <mat-error>
+                        Este campo es obligatorio
+                    </mat-error>
+                }
+                @if(signUpForm.get('confirmPassword')?.hasError('match_password')){
+                    <mat-error>
+                    Las contraseñas no coinciden
+                    </mat-error>
+                }
+            </mat-form-field>
+            @if(signUpForm.get('confirmPassword')?.touched && signUpForm.errors){
+                @if(signUpForm.hasError('match_password')){
+                    <mat-error>Las contraseñas no coinciden</mat-error>
+                }
+            }
+            <button mat-flat-button type="submit" class="w-1/2 self-center bg-green-500 text-white py-2 rounded-md hover:bg-green-600">Registrarse</button>
+            <p class="text-center text-sm text-gray-500">¿Ya tienes una cuenta? <a routerLink="/auth/sign-in" class="text-green-500">Inicia
+                    sesión</a></p>
+        </form>
+    </section>
+
+    <!-- Imagen de Fondo -->
+    <section class="w-1/2 flex items-center justify-center">
+        <img src="assets/chatai.jpg" alt="Descripción de la imagen" class="object-cover w-full h-full">
+    </section>
+</main>

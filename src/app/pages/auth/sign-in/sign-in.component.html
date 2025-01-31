@@ -1,0 +1,57 @@
+<main class="flex h-screen">
+<section class="w-1/2 p-20 flex flex-col justify-center">
+  <header class="mb-6 text-center">
+    <h1 class="text-2xl font-bold text-gray-700">Bienvenido a <span class="text-green-500">ChatAI</span></h1>
+    <p class="text-sm text-gray-500">Inicia sesión o regístrate</p>
+  </header>
+
+  <form class="space-y-4 flex flex-col" [formGroup]="signInForm" (ngSubmit)="SingIn()" >
+    <mat-label class="block text-gray-700 font-medium">Nombre</mat-label>
+    <mat-form-field appearance="outline" class="w-full"  >
+      <input
+        matInput
+        type="text"
+        formControlName="name"
+      />
+      @if(signInForm.get('name')!.hasError('required') ){
+        <mat-error>
+          Este campo es obligatorio
+        </mat-error>
+      }
+      @if(signInForm.get('name')!.hasError('maxlength') ){
+        <mat-error>
+          El campo nombre no puede contener más de 50 carácteres
+        </mat-error>
+      }
+    </mat-form-field>
+    <mat-label class="block text-gray-700 font-medium">Contraseña</mat-label>
+    <mat-form-field appearance="outline" class="w-full">
+      <input
+        matInput
+        type="password"
+        formControlName="password"
+        class="w-full"
+      />
+      @if(signInForm.get('password')!.hasError('required') ){
+        <mat-error>
+          Este campo es obligatorio
+        </mat-error>
+      }
+    </mat-form-field>
+    <button mat-flat-button type="submit"
+      class="w-1/2 bg-green-500 text-white py-2 rounded-md hover:bg-green-600 self-center"
+    >
+      Iniciar sesión
+    </button>
+    <p class="text-center text-sm text-gray-500">
+      ¿No tienes cuenta? <a routerLink="/auth/sign-up" class="text-green-500 cursor-pointer">Regístrate</a>
+    </p>
+  </form>
+</section>
+
+<!-- Imagen de Fondo -->
+<section class="w-1/2 flex items-center justify-center">
+  <img src="assets/chatai.jpg" alt="Descripción de la imagen" class="object-cover w-full h-full">
+</section>
+
+</main>

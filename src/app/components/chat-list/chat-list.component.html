@@ -1,0 +1,29 @@
+<section class="px-5">
+    <header class="flex justify-between mb-5">
+        <h3 class="text-lg font-medium" >My chats</h3>
+        <button mat-icon-button (click)="openDialog()" >
+            <mat-icon>add</mat-icon>
+        </button>
+      </header>
+      <mat-divider></mat-divider>
+    <main>
+        <mat-selection-list [multiple]="false" [hideSingleSelectionIndicator]="true" [formControl]="chatListControl" > 
+          @for(chat of chats; track chat._id){
+            <mat-list-option (click)="onSelectChat(chat._id)" >
+              <img matListItemAvatar [src]="chat.groupUrlProfile ? chat.groupUrlProfile : 'assets/group-img.webp' " alt="alttext">
+              <p mat-line class="flex justify-between"> 
+                <span class="font-medium">
+                  {{chat.name}}
+                </span>
+                <span class="text-sm text-opacity-70">
+                  {{chat.lastMessage?.createdAt | date:'HH:mm'}}
+                </span>
+              </p>
+              <p mat-line>
+                {{chat.lastMessage?.content}}
+              </p>
+            </mat-list-option>
+          }
+          </mat-selection-list> 
+    </main>
+</section>

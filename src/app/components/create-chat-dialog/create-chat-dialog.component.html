@@ -1,0 +1,38 @@
+
+  <header>
+    <h1 mat-dialog-title>Crear chat</h1>
+  </header>
+  <mat-dialog-content>
+
+    <form>
+      <h3>Nombre</h3>
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [formControl]="nameControl">
+        @if(nameControl!.hasError('required') ){
+          <mat-error>
+            Este campo es obligatorio
+          </mat-error>
+        }
+      </mat-form-field>
+  
+      <h3>Usuarios</h3>
+      <mat-divider></mat-divider>
+        <mat-selection-list #usersList >
+          @for (user of users; track user) {
+            <mat-list-option class="flex" [value]="user._id">
+              <img matListItemAvatar [src]="user.imgUrlProfile ? user.imgUrlProfile : 'assets/person.png'" alt="alttext">
+              <p mat-line class="flex justify-between"> 
+                <span class="font-medium">
+                  {{user.name}}
+                </span>
+              </p>
+            </mat-list-option>
+          }
+      </mat-selection-list>
+    </form>
+  </mat-dialog-content> 
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close class="mr-2">Cancelar</button>
+    <button mat-flat-button mat-dialog-close cdkFocusInitial [disabled]="nameControl.invalid"  (click)="createChat()">Guardar</button>
+  </mat-dialog-actions>
+

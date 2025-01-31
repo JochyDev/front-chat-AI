@@ -1,0 +1,40 @@
+@if (selectedChat) {
+    <section class="main p-5 h-full max-h-full">
+        <div class="flex mb-2">
+            <img class="object-cover rounded-full mr-4 h-9" [src]="selectedChat.groupUrlProfile ? selectedChat.groupUrlProfile : 'assets/group-img.webp'" >
+            <div>
+                <h2>{{selectedChat.name}}</h2>
+                <p>{{membersLabel}}</p>
+            </div>
+        </div>      
+        <mat-divider></mat-divider>
+        <div class="flex flex-col  messages-area overflow-y-scroll">
+        <div class="first:mt-auto flex flex-col w-full px-5 pt-2">
+            @for (message of selectedChat.messages; track message._id) {
+                <mat-card class="bg-white pt-2 pl-2 pb-4 pr-24 mb-4 rounded-lg w-fit relative self-end" [class.!self-start]="userLogged.id === message.sender?._id"  >
+                    @if(message.isAiResponse){
+                        <p class="text-orange-500 font-semibold">{{'GEMINI'}}</p>
+                    } @else if(userLogged.id === message.sender?._id) {
+                        <p class="text-green-500 font-semibold">Tú</p>
+                    } @else {
+                        <p class="text-blue-500 font-semibold">{{message.sender?.name}}</p>
+                    }
+                    <p>{{message.content}}</p>
+                    <span class="absolute right-2 bottom-[2px] text-xs">
+                        {{message.createdAt | date:'YYYY/MM/dd HH:mm'}}
+                    </span>
+                </mat-card>
+            }
+        </div>
+        <div #endOfChat></div>
+        </div>
+        <div class="pt-4">
+        <mat-form-field appearance="outline" class="w-full" >
+            <input matInput type="text" placeholder="Enter your message" [formControl]="messageControl" (keydown.enter)="sendMessage()" >
+            <button mat-icon-button matSuffix class="mr-2" (click)="sendMessage()" >
+            <mat-icon>send</mat-icon>
+            </button>
+        </mat-form-field>
+        </div>
+    </section>
+} 
