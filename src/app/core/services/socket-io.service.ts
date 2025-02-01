@@ -19,7 +19,9 @@ export class SocketIoService {
     this.socket = io(this.apiUrl, {
       extraHeaders: {
         authentication: this.authService.accessToken
-      }
+      },
+      transports: ['websocket'],
+      withCredentials: true
     })
   }
 
