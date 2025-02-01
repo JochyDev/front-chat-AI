@@ -6,7 +6,7 @@
 
     <form>
       <h3>Nombre</h3>
-      <mat-form-field appearance="outline">
+      <mat-form-field appearance="outline" class="mb-4">
         <input matInput type="text" [formControl]="nameControl">
         @if(nameControl!.hasError('required') ){
           <mat-error>

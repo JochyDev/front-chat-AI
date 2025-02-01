@@ -11,7 +11,7 @@ export const routes: Routes = [
                 path: 'chat',
                 loadComponent: () => import('./pages/main-chat/main-chat.component').then((c) => c.MainChatComponent),
                 title: 'Chat principal'
-              },
+            },
         ]
     },
     {
@@ -19,7 +19,7 @@ export const routes: Routes = [
         loadChildren: () => import('./pages/auth/auth.routes')
     },
     {
-        path: '**',
-        redirectTo: '/auth/sign-in'
+        path: "**",
+        redirectTo: 'chat'
     }
 ];

@@ -11,7 +11,7 @@
         <div class="flex flex-col  messages-area overflow-y-scroll">
         <div class="first:mt-auto flex flex-col w-full px-5 pt-2">
             @for (message of selectedChat.messages; track message._id) {
-                <mat-card class="bg-white pt-2 pl-2 pb-4 pr-24 mb-4 rounded-lg w-fit relative self-end" [class.!self-start]="userLogged.id === message.sender?._id"  >
+                <mat-card class="bg-white pt-2 pl-2 max-w-96 pb-4 pr-24 mb-4 rounded-lg w-fit relative self-end" [class.!self-start]="userLogged.id === message.sender?._id" [class.!self-center]="message.isAiResponse" >
                     @if(message.isAiResponse){
                         <p class="text-orange-500 font-semibold">{{'GEMINI'}}</p>
                     } @else if(userLogged.id === message.sender?._id) {
@@ -25,15 +25,28 @@
                     </span>
                 </mat-card>
             }
+            @if(errorMessage()){
+                <div class="bg-red-400 pt-2 pl-2 max-w-96 pb-4 pr-24 mb-4 rounded-lg w-fit relative self-center">
+                    <p>Error: {{errorMessage()}}</p>
+                </div>
+            }
         </div>
         <div #endOfChat></div>
         </div>
         <div class="pt-4">
         <mat-form-field appearance="outline" class="w-full" >
             <input matInput type="text" placeholder="Enter your message" [formControl]="messageControl" (keydown.enter)="sendMessage()" >
-            <button mat-icon-button matSuffix class="mr-2" (click)="sendMessage()" >
-            <mat-icon>send</mat-icon>
+            <button mat-icon-button matPrefix matTooltip='Para consultar Api externas sigue la siguiente estructura: /query <nombre del api> <termino de búsqueda>' class="ml-2" >
+                <mat-icon>info</mat-icon>
             </button>
+            @if(!isLoading()){
+                <button mat-icon-button matSuffix class="mr-2" (click)="sendMessage()" >
+                    <mat-icon>send</mat-icon>
+                </button>
+            }
+            @if(isLoading()){
+                <mat-spinner class="mr-2" [diameter]="20" matSuffix ></mat-spinner>
+            }
         </mat-form-field>
         </div>
     </section>
