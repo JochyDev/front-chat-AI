@@ -12,6 +12,11 @@ export const routes: Routes = [
                 loadComponent: () => import('./pages/main-chat/main-chat.component').then((c) => c.MainChatComponent),
                 title: 'Chat principal'
             },
+            {
+                path: '',
+                redirectTo: 'chat',
+                pathMatch: 'full'
+            }
         ]
     },
     {
