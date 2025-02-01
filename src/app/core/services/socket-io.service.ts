@@ -3,16 +3,20 @@ import { Observable } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
 import { AuthService } from './auth.service';
 
+import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class SocketIoService {
 
+  apiUrl = environment.apiUrl;
+
   socket: Socket;
   constructor(
     private authService: AuthService
   ) { 
-    this.socket = io('http://localhost:3000',{
+    this.socket = io(this.apiUrl, {
       extraHeaders: {
         authentication: this.authService.accessToken
       }

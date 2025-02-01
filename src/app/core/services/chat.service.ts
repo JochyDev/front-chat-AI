@@ -4,12 +4,14 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Chat } from '../interfaces/chat.interface';
 import { Message } from '../interfaces/message.interface';
 
+import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
 
-  apiUrl = 'http://localhost:3000'
+  apiUrl = environment.apiUrl;
 
   private http = inject(HttpClient);
 

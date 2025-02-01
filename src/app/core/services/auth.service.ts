@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
 import { User } from '../interfaces/user.interface';
 
+import { environment } from '../../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  apiUrl = 'http://localhost:3000/auth'
+  apiUrl = environment.apiUrl + '/auth'
 
   set accessToken(token: string)
   {
