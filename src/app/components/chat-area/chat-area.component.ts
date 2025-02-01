@@ -63,7 +63,7 @@ export class ChatAreaComponent {
 
     this._socketIoService.listen('on-message').subscribe((message: any) => {
       this.isLoading.update(val => false);
-      if(this.selectedChat._id === message.chat){
+      if(this.selectedChat?._id === message.chat){
         this.selectedChat.messages.push(message);
       }
       if(this.endOfChat){
