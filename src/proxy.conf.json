@@ -1,0 +1,6 @@
+{
+    "/api": {
+        "target": "https://chat-ai-api-ng7b.vercel.app",
+        "secure": false
+    }
+}
