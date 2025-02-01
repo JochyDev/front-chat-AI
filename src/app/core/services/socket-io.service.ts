@@ -20,6 +20,7 @@ export class SocketIoService {
       extraHeaders: {
         authentication: this.authService.accessToken
       },
+      transports: ['websocket']
     })
   }
 
