@@ -58,7 +58,6 @@ export class CreateChatDialogComponent {
   getAllUsers(){
     this._authService.getAllUser().subscribe({
       next: (response ) => {
-        debugger
         this.users = response.filter((user) => user._id !== this.userLogged.id);
       }
     })
