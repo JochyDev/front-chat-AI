@@ -1,7 +1,7 @@
 <main class=" h-full flex bg-white shadow-lg rounded-lg overflow-hidden">
 
     <!-- Formulario de Registro -->
-    <section class="w-1/2 p-20 flex flex-col justify-center">
+    <section class="w-full md:w-1/2 md:p-20 px-10 flex flex-col justify-center">
         <header class="mb-6 text-center">
             <h1 class="text-2xl font-bold text-gray-700">Bienvenido a <span class="text-green-500" >ChatAI</span></h1>
             <p class="text-sm text-gray-500">Regístrate para comenzar</p>
@@ -50,14 +50,14 @@
                     <mat-error>Las contraseñas no coinciden</mat-error>
                 }
             }
-            <button mat-flat-button type="submit" class="w-1/2 self-center bg-green-500 text-white py-2 rounded-md hover:bg-green-600">Registrarse</button>
+            <button mat-flat-button type="submit" class="w-full md:w-1/2 self-center bg-green-500 text-white py-2 rounded-md hover:bg-green-600">Registrarse</button>
             <p class="text-center text-sm text-gray-500">¿Ya tienes una cuenta? <a routerLink="/auth/sign-in" class="text-green-500">Inicia
                     sesión</a></p>
         </form>
     </section>
 
     <!-- Imagen de Fondo -->
-    <section class="w-1/2 flex items-center justify-center">
+    <section class="w-1/2 hidden md:flex items-center justify-center">
         <img src="assets/chatai.jpg" alt="Descripción de la imagen" class="object-cover w-full h-full">
     </section>
 </main>

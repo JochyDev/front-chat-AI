@@ -1,17 +1,17 @@
-<section class="px-5">
-    <header class="flex justify-between mb-5">
-        <h3 class="text-lg font-medium" >My chats</h3>
-        <button mat-icon-button (click)="openDialog()" >
+<section class="md:px-5 px-0">
+    <header class="flex md:flex-row flex-col md:justify-between justify-center items-center md:mb-4 mb-2">
+        <h3 class="md:text-lg text-xs font-medium" >Mis chats</h3>
+        <button mat-icon-button (click)="openDialog()" class="w-6 md:w-12" >
             <mat-icon>add</mat-icon>
         </button>
       </header>
       <mat-divider></mat-divider>
-    <main>
+    <main class="overflow-y-auto">
         <mat-selection-list [multiple]="false" [hideSingleSelectionIndicator]="true" [formControl]="chatListControl" > 
           @for(chat of chats; track chat._id){
             <mat-list-option (click)="onSelectChat(chat._id)" >
-              <img matListItemAvatar [src]="chat.groupUrlProfile ? chat.groupUrlProfile : 'assets/group-img.webp' " alt="alttext">
-              <p mat-line class="flex justify-between"> 
+              <img matListItemAvatar [src]="chat.groupUrlProfile ? chat.groupUrlProfile : 'assets/group-img.webp' " alt="alttext" >
+              <p mat-line class="hidden md:flex justify-between"> 
                 <span class="font-medium">
                   {{chat.name}}
                 </span>
@@ -19,7 +19,7 @@
                   {{chat.lastMessage?.createdAt | date:'HH:mm'}}
                 </span>
               </p>
-              <p mat-line>
+              <p mat-line class="hidden md:flex">
                 {{chat.lastMessage?.content}}
               </p>
             </mat-list-option>
