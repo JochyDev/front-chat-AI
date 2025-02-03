@@ -13,6 +13,7 @@ import { SocketIoService } from '../../core/services/socket-io.service';
 import { MatCardModule } from '@angular/material/card';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelect, MatSelectChange, MatSelectModule } from '@angular/material/select';
 
 
 @Component({
@@ -26,17 +27,30 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     DatePipe, 
     MatCardModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelectModule
   ],
   templateUrl: './chat-area.component.html',
   styleUrl: './chat-area.component.scss'
 })
 export class ChatAreaComponent {
 
+  apiOptions = [
+    '/query pokemon charizard',
+    '/query pokemon pikachu',
+    '/query rickAndMorty morty',
+    '/query rickAndMorty rick',
+    '/query fakeStore jewelery',
+    '/query fakeStore electronics',
+
+  ]
+
   private _chatService = inject(ChatService);
   private _authService = inject(AuthService);
   private _socketIoService = inject(SocketIoService);
   @ViewChild('endOfChat') endOfChat!: ElementRef;
+
+  @ViewChild('mySelect') mySelect!: MatSelect;
 
 
   messageControl = new FormControl('')
@@ -87,6 +101,11 @@ export class ChatAreaComponent {
 
   ngOnInit(): void {
     this.userLogged = this._authService.user;
+    this.messageControl.valueChanges.subscribe((val) => {
+      if(val?.startsWith('/query')){
+        this.mySelect.open();
+      }
+    })
   }
 
 
@@ -105,6 +124,10 @@ export class ChatAreaComponent {
     this._socketIoService.emit(eventName, data);
     this.isLoading.update(val => true);
     this.messageControl.reset();
+  }
+
+  setApiQuery(event: MatSelectChange){
+    this.messageControl.setValue(event.value)
   }
 
 }

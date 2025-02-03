@@ -47,6 +47,12 @@
             @if(isLoading()){
                 <mat-spinner class="mr-2" [diameter]="20" matSuffix ></mat-spinner>
             }
+
+            <mat-select #mySelect class="hidden" (selectionChange)="setApiQuery($event)"  >
+                @for (apiQuery of apiOptions; track $index) {
+                    <mat-option [value]="apiQuery">{{apiQuery}}</mat-option>
+                } 
+            </mat-select>
         </mat-form-field>
         </div>
     </section>

@@ -6,6 +6,11 @@
     height: calc(100vh - 220px);
 }
 
+.mat-mdc-select {
+    display: none;
+}
+
+
 @media (min-width: 768px){
     .messages-area {
         height: calc(100vh - 230px);
